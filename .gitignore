@@ -1,0 +1,13 @@
+# Ignore system files
+.DS_Store
+
+# Ignore generated files and binaries
+bin/
+gen/
+
+# Ignore editor files
+*.swp
+.settings
+.classpath
+local.properties
+proguard.cfg
