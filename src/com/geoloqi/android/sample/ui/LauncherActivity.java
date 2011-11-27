@@ -1,8 +1,10 @@
-package com.geoloqi.android.sample;
+package com.geoloqi.android.sample.ui;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+
+import com.geoloqi.android.sample.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -45,8 +47,7 @@ public class LauncherActivity extends Activity implements View.OnClickListener {
                 byte[] response = receivePacket.getData();
                 Log.d(TAG, "Response length: "+response.length);
                 long value = 0;
-                for (int i = 0; i < response.length; i++)
-                {
+                for (int i = 0; i < response.length; i++) {
                    value += (response[i] & 0xff) << (8 * i);
                 }
                 Log.d(TAG, "Response: "+value);
