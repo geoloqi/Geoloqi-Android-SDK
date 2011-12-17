@@ -14,8 +14,6 @@ import android.util.Log;
 
 public class LauncherActivity extends Activity {
     public static final String TAG = "LauncherActivity";
-    public static final String LOCALHOST = "10.0.2.2";
-    public static final int LOCALHOST_UDP_PORT = 43333;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
