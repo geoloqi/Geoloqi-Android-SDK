@@ -14,11 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.geoloqi.android.sample.R;
-import com.geoloqi.android.sdk.LQException;
-import com.geoloqi.android.sdk.LQSession;
-import com.geoloqi.android.sdk.LQSession.OnCreateAnonymousUserAccountListener;
-import com.geoloqi.android.sdk.LQTracker;
-import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
 import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
 import com.geoloqi.android.sdk.ui.LQSettingsActivity;
@@ -36,35 +31,15 @@ public class LauncherActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        // TODO: When do we start the service for the first time? LQSession or LQTracker?
-        
-        /*
-        final LQTracker tracker = LQTracker.getInstance();
-        
-        if (tracker.getSession() == null) {
-            LQSession.createAnonymousUserAccount(new OnCreateAnonymousUserAccountListener() {
-                @Override
-                public void onCreateAnonymousUserAccount(LQSession session, LQException e) {
-                    if (session != null) {
-                        // Create a new anonymous session for the tracker.
-                        // TODO: Where are we going to pull these key and secret values from?
-                        //session.setAPIKey("key", "secret");
-                        
-                        tracker.setSession(session);
-                        tracker.setProfile(LQTrackerProfile.LOGGING);
-                    } else {
-                        Log.e(TAG, e.getMessage());
-                    }
-                }
-            });
-        }
-        */
-        
         // Bind to LQService so we can call methods on it.
+        // TODO: Define Intent ACTIONS for starting the service.
+        //       - START_WITH_ANON_ACCOUNT
+        //       - START_WITH_USER_ACCOUNT
         Intent intent = new Intent(this, LQService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         
-        //findViewById(R.id.home_button_1).setOnClickListener(this);
+        // Set our on click listeners
+        findViewById(R.id.home_button_1).setOnClickListener(this);
     }
     
     @Override
