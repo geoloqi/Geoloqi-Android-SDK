@@ -14,13 +14,68 @@
         android:text="Geoloqi Android SDK"
         android:background="#444444" />
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:padding="20dp">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Updates" />
+        <TextView
+            android:id="@+id/batched_updates"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="No updates to send!" />
+        
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Location Fix" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:text="Latitude:" />
+            <TextView
+                android:id="@+id/location_lat"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="0.0" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:text="Longitude:" />
+            <TextView
+                android:id="@+id/location_long"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="0.0" />
+        </LinearLayout>
+        
         <Button
             android:id="@+id/home_button_1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Click Me!" />
     </LinearLayout>
 </LinearLayout>

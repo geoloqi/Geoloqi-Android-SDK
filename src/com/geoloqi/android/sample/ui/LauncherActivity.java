@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.geoloqi.android.sample.R;
 import com.geoloqi.android.sample.receiver.SampleReceiver;
@@ -20,7 +22,8 @@ import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
 import com.geoloqi.android.sdk.ui.LQSettingsActivity;
 
-public class LauncherActivity extends Activity implements View.OnClickListener {
+public class LauncherActivity extends Activity implements View.OnClickListener,
+        SampleReceiver.OnLocationChangedListener {
     public static final String TAG = "LauncherActivity";
     public static final String LOCALHOST = "10.0.2.2";
     public static final int LOCALHOST_UDP_PORT = 43333;
@@ -144,4 +147,13 @@ public class LauncherActivity extends Activity implements View.OnClickListener {
             mBound = false;
         }
     };
+
+    @Override
+    public void onLocationChanged(Location location) {
+        TextView latitudeView = (TextView) findViewById(R.id.location_lat);
+        TextView longitudeView = (TextView) findViewById(R.id.location_long);
+        
+        latitudeView.setText(Double.toString(location.getLatitude()));
+        longitudeView.setText(Double.toString(location.getLongitude()));
+    }
 }
