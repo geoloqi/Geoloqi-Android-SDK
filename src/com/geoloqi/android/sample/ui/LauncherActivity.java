@@ -22,6 +22,11 @@ import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
 import com.geoloqi.android.sdk.ui.LQSettingsActivity;
 
+/**
+ * <p>...</p>
+ * 
+ * @author Tristan Waddington
+ */
 public class LauncherActivity extends Activity implements View.OnClickListener,
         SampleReceiver.OnLocationChangedListener {
     public static final String TAG = "LauncherActivity";
