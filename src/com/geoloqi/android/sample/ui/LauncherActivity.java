@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.geoloqi.android.sample.R;
+import com.geoloqi.android.sample.receiver.SampleReceiver;
 import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
 import com.geoloqi.android.sdk.ui.LQSettingsActivity;
@@ -25,12 +27,20 @@ public class LauncherActivity extends Activity implements View.OnClickListener {
     
     private LQService mService;
     private boolean mBound;
+    private SampleReceiver mLocationReceiver = new SampleReceiver();
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        // Set our on click listeners
+        findViewById(R.id.home_button_1).setOnClickListener(this);
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
         // Bind to LQService so we can call methods on it.
         // TODO: Define Intent ACTIONS for starting the service.
         //       - START_WITH_ANON_ACCOUNT
@@ -38,8 +48,10 @@ public class LauncherActivity extends Activity implements View.OnClickListener {
         Intent intent = new Intent(this, LQService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         
-        // Set our on click listeners
-        findViewById(R.id.home_button_1).setOnClickListener(this);
+        // Wire up the sample location receiver
+        final IntentFilter filter = new IntentFilter();
+        filter.addAction(SampleReceiver.ACTION_LOCATION_CHANGED);
+        registerReceiver(mLocationReceiver, filter);
     }
     
     @Override
@@ -51,6 +63,9 @@ public class LauncherActivity extends Activity implements View.OnClickListener {
             unbindService(mConnection);
             mBound = false;
         }
+        
+        // Unregister our location receiver
+        unregisterReceiver(mLocationReceiver);
     }
     
     @Override

@@ -28,6 +28,15 @@
             </intent-filter>
         </activity>
         
+        <receiver
+            android:name=".receiver.SampleReceiver"
+            android:enabled="false"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.geoloqi.android.sdk.action.LOCATION_CHANGED" />
+            </intent-filter>
+        </receiver>
+        
         <!-- Geoloqi SDK services and activities -->
         <service
             android:name="com.geoloqi.android.sdk.service.LQService"
