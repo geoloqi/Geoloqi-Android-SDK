@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.database.Cursor;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -38,18 +39,22 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        // Start the tracking service
+        Intent intent = new Intent(this, LQService.class);
+        intent.setAction(LQService.ACTION_START_WITH_ANONYMOUS_USER);
+        intent.putExtra(LQService.EXTRA_SDK_ID, Constants.LQ_SDK_ID);
+        intent.putExtra(LQService.EXTRA_SDK_SECRET, Constants.LQ_SDK_SECRET);
+        startService(intent);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         
-        // Start the LQService and bind it to this activity so we can call methods on it.
+        // Bind to the tracking service so we can call public methods on it
         Intent intent = new Intent(this, LQService.class);
-        intent.setAction(LQService.ACTION_START_WITH_ANONYMOUS_USER);
-        intent.putExtra(LQService.EXTRA_SDK_ID, Constants.LQ_SDK_ID);
-        intent.putExtra(LQService.EXTRA_SDK_SECRET, Constants.LQ_SDK_SECRET);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        bindService(intent, mConnection, 0);
         
         // Wire up the sample location receiver
         final IntentFilter filter = new IntentFilter();
