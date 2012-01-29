@@ -23,6 +23,19 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:text="Tracker Profile" />
+        <TextView
+            android:id="@+id/tracker_profile"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="@null" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="Updates" />
         <TextView
             android:id="@+id/batched_updates"
@@ -70,12 +83,5 @@
                 android:layout_height="wrap_content"
                 android:text="0.0" />
         </LinearLayout>
-        
-        <Button
-            android:id="@+id/home_button_1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Click Me!" />
     </LinearLayout>
 </LinearLayout>
