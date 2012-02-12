@@ -13,8 +13,8 @@ the command-line Android tools and ant.
     # Install to device
     $ adb install bin/GeoloqiSampleAndroidApp.apk
 
-Of course you'll also need to include the Geoloqi SDK source as a library
-project for the build to successfully compile.
+Of course you'll also need to include the Geoloqi SDK library. Dropping the
+.jar into your `libs` directory should be sufficient.
 
 Usage
 =====
@@ -22,6 +22,9 @@ Usage
 
 License
 =======
-Copyright 2011 by Geoloqi LLC and contributors.
+Copyright 2011 by [Geoloqi.com][geoloqi-site] and contributors.
 
 See LICENSE.
+
+[geoloqi-site]: https://geoloqi.com/
+[geoloqi-dev-site]: https://developers.geoloqi.com/
