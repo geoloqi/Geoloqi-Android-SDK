@@ -23,7 +23,6 @@ import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
 import com.geoloqi.android.sdk.provider.LQDatabaseHelper;
 import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
-import com.geoloqi.android.sdk.ui.LQSettingsActivity;
 
 /**
  * <p>...</p>
@@ -92,7 +91,7 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
         case R.id.settings:
-            startActivity(new Intent(this, LQSettingsActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
         return false;

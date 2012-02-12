@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Geoloqi Sample Android App</string>
+    <string name="app_name">Geoloqi Android SDK</string>
+    
+    <!-- Activity titles -->
     <string name="settings_title">Settings</string>
+    
+    <!-- Preference category titles -->
+    <string name="general_category_title">General</string>
+    <string name="tracking_category_title">Tracking</string>
+    <string name="account_category_title">Account</string>
+    <string name="hardware_category_title">Hardware</string>
+    
+    <!-- Preference keys -->
+    <string name="pref_key_tracker_profile">tracker_profile</string>
+    <string name="pref_key_account_username">account_username</string>
+    <string name="pref_key_device_id">device_id</string>
+    <string name="pref_key_device_mac">device_mac</string>
+    
+    <!-- Preference titles -->
+    <string name="tracker_profile_title">Tracking profile</string>
+    <string name="username_title">Username</string>
+    <string name="device_id_title">Device ID</string>
+    <string name="device_mac_title">WiFi MAC address</string>
+    
+    <!-- Preference values -->
+    <string-array name="tracker_profile_entries">
+        <item>OFF</item>
+        <item>Passive</item>
+        <item>Logging</item>
+        <item>Real-time</item>
+    </string-array>
+    <string-array name="tracker_profile_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

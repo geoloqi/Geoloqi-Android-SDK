@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Tracking preferences -->
+    <PreferenceCategory
+        android:title="@string/tracking_category_title">
+        <ListPreference
+            android:key="@string/pref_key_tracker_profile"
+            android:title="@string/tracker_profile_title"
+            android:enabled="true"
+            android:entries="@array/tracker_profile_entries"
+            android:entryValues="@array/tracker_profile_values"
+            android:defaultValue="0" />
+    </PreferenceCategory>
+    
+    <!-- Account preferences -->
+    <PreferenceCategory
+        android:title="@string/account_category_title">
+        <Preference
+            android:key="@string/pref_key_account_username"
+            android:title="@string/username_title"
+            android:label="@null"
+            android:enabled="false" />
+    </PreferenceCategory>
+    
+    <!-- Hardware preferences -->
+    <PreferenceCategory
+        android:title="@string/hardware_category_title">
+        <Preference
+            android:key="@string/pref_key_device_id"
+            android:title="@string/device_id_title"
+            android:label="@null"
+            android:enabled="false" />
+        <Preference
+            android:key="@string/pref_key_device_mac"
+            android:title="@string/device_mac_title"
+            android:label="@null"
+            android:enabled="false" />
+    </PreferenceCategory>
+</PreferenceScreen>
