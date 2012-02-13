@@ -12,10 +12,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import com.geoloqi.android.sample.R;
 import com.geoloqi.android.sdk.LQSharedPreferences;
 import com.geoloqi.android.sdk.LQTracker;
 import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
-import com.geoloqi.android.sdk.R;
 import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
 
