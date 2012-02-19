@@ -30,7 +30,7 @@ import com.geoloqi.android.sdk.service.LQService.LQBinder;
  * @author Tristan Waddington
  */
 public class LauncherActivity extends Activity implements SampleReceiver.OnLocationChangedListener,
-        SampleReceiver.OnTrackerProfileChangedListener {
+        SampleReceiver.OnTrackerProfileChangedListener, SampleReceiver.OnLocationUploadedListener {
     public static final String TAG = "LauncherActivity";
 
     private LQService mService;
@@ -62,6 +62,7 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
         final IntentFilter filter = new IntentFilter();
         filter.addAction(SampleReceiver.ACTION_TRACKER_PROFILE_CHANGED);
         filter.addAction(SampleReceiver.ACTION_LOCATION_CHANGED);
+        filter.addAction(SampleReceiver.ACTION_LOCATION_UPLOADED);
         registerReceiver(mLocationReceiver, filter);
     }
 
@@ -95,6 +96,44 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
             return true;
         }
         return false;
+    }
+
+    /**
+     * Display the number of batched location fixes waiting to be sent.
+     */
+    private void showBatchedLocationCount() {
+        TextView updates = (TextView) findViewById(R.id.batched_updates);
+        if (updates != null) {
+            final LQTracker tracker = mService.getTracker();
+            final LQDatabaseHelper helper = new LQDatabaseHelper(this);
+            final SQLiteDatabase db = helper.getWritableDatabase();
+            final Cursor c = tracker.getBatchedLocationFixes(db);
+            updates.setText(String.format("%d batched updates",
+                            c.getCount()));
+            c.close();
+            db.close();
+        }
+    }
+
+    /**
+     * Display the values from the last recorded location fix.
+     * @param location
+     */
+    private void showCurrentLocation(Location location) {
+        TextView latitudeView = (TextView) findViewById(R.id.location_lat);
+        if (latitudeView != null) {
+            latitudeView.setText(Double.toString(location.getLatitude()));
+        }
+        
+        TextView longitudeView = (TextView) findViewById(R.id.location_long);
+        if (longitudeView != null) {
+            longitudeView.setText(Double.toString(location.getLongitude()));
+        }
+        
+        TextView accuracyView = (TextView) findViewById(R.id.location_accuracy);
+        if (accuracyView != null) {
+            accuracyView.setText(String.valueOf(location.getAccuracy()));
+        }
     }
 
     /** Defines callbacks for service binding, passed to bindService() */
@@ -134,26 +173,12 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
 
     @Override
     public void onLocationChanged(Location location) {
-        TextView latitudeView = (TextView) findViewById(R.id.location_lat);
-        if (latitudeView != null) {
-            latitudeView.setText(Double.toString(location.getLatitude()));
-        }
-        
-        TextView longitudeView = (TextView) findViewById(R.id.location_long);
-        if (longitudeView != null) {
-            longitudeView.setText(Double.toString(location.getLongitude()));
-        }
-        
-        TextView updates = (TextView) findViewById(R.id.batched_updates);
-        if (updates != null) {
-            final LQTracker tracker = mService.getTracker();
-            final LQDatabaseHelper helper = new LQDatabaseHelper(this);
-            final SQLiteDatabase db = helper.getWritableDatabase();
-            final Cursor c = tracker.getBatchedLocationFixes(db);
-            updates.setText(String.format("%d batched updates",
-                            c.getCount()));
-            c.close();
-            db.close();
-        }
+        showBatchedLocationCount();
+        showCurrentLocation(location);
+    }
+
+    @Override
+    public void onLocationUploaded(int count) {
+        showBatchedLocationCount();
     }
 }
