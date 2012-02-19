@@ -46,6 +46,20 @@ public class SampleReceiver extends LQBroadcastReceiver {
         }
     }
 
+    @Override
+    public void onLocationUploaded(Context context, int count) {
+        try {
+            OnLocationUploadedListener listener = (OnLocationUploadedListener) context;
+            listener.onLocationUploaded(count);
+        } catch (ClassCastException e) {
+            // The broadcast receiver is running with a Context that
+            // does not implement OnLocationUploadedListener. If your activity
+            // has implemented the interface, then this generally means
+            // that the receiver is running in a global context and
+            // is not bound to any particular activity.
+        }
+    }
+
     public interface OnTrackerProfileChangedListener {
         public void onTrackerProfileChanged(LQTrackerProfile oldProfile,
                         LQTrackerProfile newProfile);
@@ -53,5 +67,9 @@ public class SampleReceiver extends LQBroadcastReceiver {
 
     public interface OnLocationChangedListener {
         public void onLocationChanged(Location location);
+    }
+
+    public interface OnLocationUploadedListener {
+        public void onLocationUploaded(int count);
     }
 }
