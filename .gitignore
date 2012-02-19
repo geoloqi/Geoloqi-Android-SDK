@@ -14,6 +14,3 @@ proguard.cfg
 
 # Ignore sensitive files
 Constants.java
-
-# Ignore libs
-libs/*
