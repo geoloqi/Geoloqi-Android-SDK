@@ -147,7 +147,7 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
         TextView updates = (TextView) findViewById(R.id.batched_updates);
         if (updates != null) {
             final LQTracker tracker = mService.getTracker();
-            final LQDatabaseHelper helper = tracker.getDatabaseHelper();
+            final LQDatabaseHelper helper = new LQDatabaseHelper(this);
             final SQLiteDatabase db = helper.getWritableDatabase();
             final Cursor c = tracker.getBatchedLocationFixes(db);
             updates.setText(String.format("%d batched updates",
