@@ -24,10 +24,9 @@ Build Target
 The sample app targets Android API level 5 (Android 2.0), but you can change
 the build target to any modern version. You'll need to use the 
 [Android SDK Manager][android-sdk-components] to install the Android 2.0
-platform or update the build target of the sample app to a platform you've
-previously installed.
+platform or update the sample app to target a platform you've previously installed.
 
-You can launch the SDK manager by running the `$ android` command from your
+You can launch the SDK manager by running the `android` command from your
 terminal. You can also launch the SDK manager from Eclipse (if you've installed
 the Android plugin for Eclipse).
 
