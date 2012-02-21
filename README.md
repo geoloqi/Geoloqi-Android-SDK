@@ -21,9 +21,12 @@ can rename and update with your key and secret.
 
 Build Target
 ------------
-The sample app targets Android API level 5 (Android 2.0), but supports all
-recent modern versions. You'll need to use the [Android SDK Manager][android-sdk-components]
-to install the Android 2.0 platform or update the build target of the sample app.
+The sample app targets Android API level 5 (Android 2.0), but you can change
+the build target to any modern version. You'll need to use the 
+[Android SDK Manager][android-sdk-components] to install the Android 2.0
+platform or update the build target of the sample app to a platform you've
+previously installed.
+
 You can launch the SDK manager by running the `$ android` command from your
 terminal. You can also launch the SDK manager from Eclipse (if you've installed
 the Android plugin for Eclipse).
@@ -57,10 +60,8 @@ directory in the project root. Simply right-click the .jar and select
 **Note for Eclipse users:** One common issue when importing a new Android project
 occurs when Eclipse links your project against Java 1.5 instead of Java 1.6. If this
 happens you'll see errors generated for all methods with `@Override` annotations.
-You can fix this by updating your Eclipse/Project preferences to ensure the
-Java compiler level is set to 1.6. [Read more][stackoverflow-override]...
-
-![Alt text](https://raw.github.com/geoloqi/Sample-Android-App/master/docs/images/eclipse-compiler.png)
+You can [fix this][stackoverflow-override] by updating your [Eclipse/Project
+preferences][eclipse-compiler-image] to ensure the Java compiler level is set to 1.6.
 
 License
 =======
@@ -73,3 +74,4 @@ See LICENSE.
 [android-sdk]: http://developer.android.com/sdk/index.html
 [android-sdk-components]: http://developer.android.com/sdk/adding-components.html
 [stackoverflow-override]: http://stackoverflow.com/a/1678170/772122
+[eclipse-compiler-image]: https://raw.github.com/geoloqi/Sample-Android-App/master/docs/images/eclipse-compiler.png
