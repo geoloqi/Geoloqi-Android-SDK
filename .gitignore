@@ -4,6 +4,7 @@
 # Ignore generated files and binaries
 bin/
 gen/
+lint.xml
 
 # Ignore editor files
 *.swp
