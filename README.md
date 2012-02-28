@@ -73,6 +73,49 @@ preferences][eclipse-compiler-image] to ensure the Java compiler level is set to
 Eclipse Javadoc
 ---------------
 
+Adding the SDK to an Existing Project
+=====================================
+
+Before you begin, you'll need to modify your application's AndroidManifest.xml file to include the following permissions.
+
+```
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+```
+
+Optionally, you may also want to include the `ACCESS_MOCK_LOCATION` permission if you plan on doing any testing.
+
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+
+You'll also need to declare the tracking service in your application's manifest.
+
+```
+<application>
+    <service
+        android:name="com.geoloqi.android.sdk.service.LQService"
+        android:exported="false" />
+</application>
+```
+
+Starting the Service
+--------------------
+
+The easiest way to get started is to spin up the tracking service when the user takes some action (such as launching your app). You can start the Geoloqi tracker like starting any other [Android Service](http://developer.android.com/reference/android/app/Service.html).
+
+```
+// Start the tracking service
+Intent intent = new Intent(this, LQService.class);
+intent.setAction(LQService.ACTION_START_WITH_ANONYMOUS_USER);
+intent.putExtra(LQService.EXTRA_SDK_ID, Constants.LQ_SDK_ID);
+intent.putExtra(LQService.EXTRA_SDK_SECRET, Constants.LQ_SDK_SECRET);
+startService(intent);
+```
+
+This code will start the background service, create an anonymous user account and start requesting location updates from the system. It's that easy!
 
 License
 =======
