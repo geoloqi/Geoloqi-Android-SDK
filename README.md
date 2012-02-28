@@ -72,50 +72,78 @@ preferences][eclipse-compiler-image] to ensure the Java compiler level is set to
 
 Eclipse Javadoc
 ---------------
+The Geoloqi Android SDK Javadoc is bundled with the sample application as
+a jar file in the `libs/` directory. To load the Javadoc into Eclipse simply:
+
+1. Expand the *Referenced Libraries* section of the project in the Eclipse *Package Explorer*.
+2. Right-click on the Geoloqi SDK library (if it isn't listed, check that you've added it to your *Build Path*).
+3. Select *Properties*.
+4. Select *Javadoc Location*.
+5. Check the *Javadoc in archive* radio button.
+6. Fill out the *Archive path* text area with the path to the geoloqi-docs.jar archive file.
+
+![Alt text](https://raw.github.com/geoloqi/Sample-Android-App/master/docs/images/eclipse-javadoc.png)
 
 Adding the SDK to an Existing Project
 =====================================
-
 Before you begin, you'll need to modify your application's AndroidManifest.xml file to include the following permissions.
 
-```
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.WAKE_LOCK" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-```
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Note: This custom permission name should begin with your application's package name! -->
+    <permission
+        android:name="com.geoloqi.android.sample.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <!-- These permissions are required to enable the C2DM features of the SDK. -->
+    <uses-permission android:name="com.geoloqi.android.sample.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
 
 Optionally, you may also want to include the `ACCESS_MOCK_LOCATION` permission if you plan on doing any testing.
 
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 
-You'll also need to declare the tracking service in your application's manifest.
+You'll also need to declare the tracking service and C2DM receiver in your
+application's manifest.
 
-```
-<application>
-    <service
-        android:name="com.geoloqi.android.sdk.service.LQService"
-        android:exported="false" />
-</application>
-```
+    <application>
+        <service
+            android:name="com.geoloqi.android.sdk.service.LQService"
+            android:exported="false" />
+        <receiver
+            android:name="com.geoloqi.android.sdk.receiver.LQDeviceMessagingReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <!-- This should equal your application's package name! -->
+                <category android:name="com.geoloqi.android.sample" />
+            </intent-filter>
+        </receiver>
+    </application>
 
 Starting the Service
 --------------------
+The easiest way to get started is to spin up the tracking service when
+the user takes some action (such as launching your app). You can start
+the Geoloqi tracker like starting any other [Android Service][android-service].
 
-The easiest way to get started is to spin up the tracking service when the user takes some action (such as launching your app). You can start the Geoloqi tracker like starting any other [Android Service](http://developer.android.com/reference/android/app/Service.html).
+    // Start the tracking service
+    Intent intent = new Intent(this, LQService.class);
+    intent.setAction(LQService.ACTION_START_WITH_ANONYMOUS_USER);
+    intent.putExtra(LQService.EXTRA_SDK_ID, "Your Geoloqi SDK ID!");
+    intent.putExtra(LQService.EXTRA_SDK_SECRET, "Your Geoloqi SDK Secret!");
+    startService(intent);
 
-```
-// Start the tracking service
-Intent intent = new Intent(this, LQService.class);
-intent.setAction(LQService.ACTION_START_WITH_ANONYMOUS_USER);
-intent.putExtra(LQService.EXTRA_SDK_ID, Constants.LQ_SDK_ID);
-intent.putExtra(LQService.EXTRA_SDK_SECRET, Constants.LQ_SDK_SECRET);
-startService(intent);
-```
-
-This code will start the background service, create an anonymous user account and start requesting location updates from the system. It's that easy!
+This code will start the background service, create an anonymous user
+account and start requesting location updates from the system. It's that easy!
 
 License
 =======
@@ -128,5 +156,6 @@ See LICENSE.
 [android-docs]: http://developer.android.com/
 [android-sdk]: http://developer.android.com/sdk/index.html
 [android-sdk-components]: http://developer.android.com/sdk/adding-components.html
+[android-service]: http://developer.android.com/reference/android/app/Service.html
 [stackoverflow-override]: http://stackoverflow.com/a/1678170/772122
 [eclipse-compiler-image]: https://raw.github.com/geoloqi/Sample-Android-App/master/docs/images/eclipse-compiler.png
