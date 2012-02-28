@@ -2,6 +2,8 @@ This is an example Android application that consumes the Geoloqi
 Android SDK. It's a good starting point for anyone interested in
 developing with the Geoloqi location APIs.
 
+For more information, visit: [developers.geoloqi.com][geoloqi-dev-site]
+
 Installation
 ============
 This app can be compiled and run in the standard fashion using Eclipse or
@@ -10,6 +12,12 @@ quick tasks to complete before running the app.
 
 If you have not already installed the [Android SDK][android-sdk]
 do so now! It's also a good idea to make sure you're running the latest version.
+
+> Note: This documentation assumes the reader understands the Android SDK
+> at a basic level and knows how to build a simple Android project.
+>
+> If you find yourself struggling with the concepts outlined below, you might
+> benefit from looking over the [Android Developer Docs][android-docs].
 
 Constants
 ---------
@@ -62,6 +70,10 @@ happens you'll see errors generated for all methods with `@Override` annotations
 You can [fix this][stackoverflow-override] by updating your [Eclipse/Project
 preferences][eclipse-compiler-image] to ensure the Java compiler level is set to 1.6.
 
+Eclipse Javadoc
+---------------
+
+
 License
 =======
 Copyright 2011 by [Geoloqi.com][geoloqi-site] and contributors.
@@ -70,6 +82,7 @@ See LICENSE.
 
 [geoloqi-site]: https://geoloqi.com/
 [geoloqi-dev-site]: https://developers.geoloqi.com/
+[android-docs]: http://developer.android.com/
 [android-sdk]: http://developer.android.com/sdk/index.html
 [android-sdk-components]: http://developer.android.com/sdk/adding-components.html
 [stackoverflow-override]: http://stackoverflow.com/a/1678170/772122
