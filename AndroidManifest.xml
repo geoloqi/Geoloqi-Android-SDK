@@ -57,7 +57,7 @@
             android:exported="false" />
         <!-- NOTE: This receiver is required if you wish to enable C2DM support in the Geoloqi SDK. -->
         <receiver
-            android:name=".receiver.LQDeviceMessagingReceiver"
+            android:name="com.geoloqi.android.sdk.receiver.LQDeviceMessagingReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
