@@ -25,7 +25,10 @@ import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
 
 /**
- * <p>...</p>
+ * <p>This is the main {@link Activity} for the Geoloqi Sample Android
+ * app. It starts up and binds to the {@link LQService} tracker. It also
+ * registers to receive broadcasts from the tracker using the
+ * interfaces defined on the {@link SampleReceiver}.</p>
  * 
  * @author Tristan Waddington
  */
