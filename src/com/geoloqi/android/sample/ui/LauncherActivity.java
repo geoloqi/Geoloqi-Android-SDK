@@ -47,9 +47,10 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
         
         // Start the tracking service
         Intent intent = new Intent(this, LQService.class);
-        intent.setAction(LQService.ACTION_START_WITH_ANONYMOUS_USER);
+        intent.setAction(LQService.ACTION_DEFAULT);
         intent.putExtra(LQService.EXTRA_SDK_ID, Constants.LQ_SDK_ID);
         intent.putExtra(LQService.EXTRA_SDK_SECRET, Constants.LQ_SDK_SECRET);
+        intent.putExtra(LQService.EXTRA_C2DM_SENDER, Constants.LQ_C2DM_SENDER);
         startService(intent);
     }
 
