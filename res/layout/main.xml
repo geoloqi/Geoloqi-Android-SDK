@@ -51,6 +51,26 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="Current Location" />
+        
+        <!-- Provider -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:text="Provider:" />
+            <TextView
+                android:id="@+id/location_provider"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@null" />
+        </LinearLayout>
+        
+        <!-- Accuracy -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -67,6 +87,8 @@
                 android:layout_height="wrap_content"
                 android:text="0.0" />
         </LinearLayout>
+        
+        <!-- Latitude -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -83,6 +105,8 @@
                 android:layout_height="wrap_content"
                 android:text="0.0" />
         </LinearLayout>
+        
+        <!-- Longitude -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -95,6 +119,24 @@
                 android:text="Longitude:" />
             <TextView
                 android:id="@+id/location_long"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="0.0" />
+        </LinearLayout>
+        
+        <!-- Longitude -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:text="Speed" />
+            <TextView
+                android:id="@+id/location_speed"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="0.0" />

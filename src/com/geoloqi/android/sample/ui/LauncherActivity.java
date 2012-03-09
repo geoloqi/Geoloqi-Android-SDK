@@ -138,6 +138,16 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
         if (accuracyView != null) {
             accuracyView.setText(String.valueOf(location.getAccuracy()));
         }
+        
+        TextView speedView = (TextView) findViewById(R.id.location_speed);
+        if (speedView != null) {
+            speedView.setText(String.format("%.2f km/h", (location.getSpeed() * 3.6)));
+        }
+        
+        TextView providerView = (TextView) findViewById(R.id.location_provider);
+        if (providerView != null) {
+            providerView.setText(location.getProvider());
+        }
     }
 
     /** Defines callbacks for service binding, passed to bindService() */
