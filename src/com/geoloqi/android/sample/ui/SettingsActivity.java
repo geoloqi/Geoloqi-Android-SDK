@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.geoloqi.android.sample.R;
+import com.geoloqi.android.sdk.LQConstants;
 import com.geoloqi.android.sdk.LQSharedPreferences;
 import com.geoloqi.android.sdk.LQTracker;
 import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
@@ -25,7 +27,8 @@ import com.geoloqi.android.sdk.service.LQService.LQBinder;
  * 
  * @author Tristan Waddington
  */
-public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener {
+public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener,
+        OnPreferenceClickListener {
     public static final String TAG = "SettingsActivity";
 
     /** An instance of the default SharedPreferences. */
@@ -45,6 +48,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         Preference preference = findPreference(getString(R.string.pref_key_tracker_profile));
         if (preference != null) {
             preference.setOnPreferenceChangeListener(this);
+        }
+        
+        preference = findPreference(getString(R.string.pref_key_account_username));
+        if (preference != null) {
+            preference.setOnPreferenceClickListener(this);
         }
     }
 
@@ -71,6 +79,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             preference = findPreference(getString(R.string.pref_key_account_username));
             if (preference != null) {
                 preference.setSummary(LQSharedPreferences.getAccountUsername(this));
+            }
+            
+            // Display the SDK version
+            preference = findPreference(getString(R.string.pref_key_sdk_version));
+            if (preference != null) {
+                preference.setSummary(LQConstants.LQ_SDK_VERSION);
+            }
+            
+            // Display the SDK build
+            preference = findPreference(getString(R.string.pref_key_sdk_build));
+            if (preference != null) {
+                preference.setSummary(LQConstants.LQ_SDK_BUILD);
             }
         }
     }
@@ -117,6 +137,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        final String key = preference.getKey();
+        if (key.equals(getString(R.string.pref_key_account_username))) {
+            Toast.makeText(this, "click!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
     }
 
     /** Defines callbacks for service binding, passed to bindService() */

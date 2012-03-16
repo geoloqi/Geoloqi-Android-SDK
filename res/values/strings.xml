@@ -10,18 +10,23 @@
     <string name="tracking_category_title">Tracking</string>
     <string name="account_category_title">Account</string>
     <string name="hardware_category_title">Hardware</string>
+    <string name="about_category_title">About</string>
     
     <!-- Preference keys -->
     <string name="pref_key_tracker_profile">tracker_profile</string>
     <string name="pref_key_account_username">account_username</string>
     <string name="pref_key_device_id">device_id</string>
     <string name="pref_key_device_mac">device_mac</string>
+    <string name="pref_key_sdk_version">sdk_version</string>
+    <string name="pref_key_sdk_build">sdk_build</string>
     
     <!-- Preference titles -->
     <string name="tracker_profile_title">Tracking profile</string>
     <string name="username_title">Username</string>
     <string name="device_id_title">Device ID</string>
     <string name="device_mac_title">WiFi MAC address</string>
+    <string name="version_title">SDK version</string>
+    <string name="build_title">SDK build</string>
     
     <!-- Preference values -->
     <string-array name="tracker_profile_entries">

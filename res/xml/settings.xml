@@ -19,8 +19,7 @@
         <Preference
             android:key="@string/pref_key_account_username"
             android:title="@string/username_title"
-            android:label="@null"
-            android:enabled="false" />
+            android:label="@null" />
     </PreferenceCategory>
     
     <!-- Hardware preferences -->
@@ -37,4 +36,19 @@
             android:label="@null"
             android:enabled="false" />
     </PreferenceCategory>
+    
+    <!-- About preferences -->
+    <PreferenceCategory
+        android:title="@string/about_category_title">
+        <Preference
+            android:key="@string/pref_key_sdk_version"
+            android:title="@string/version_title"
+            android:label="@null"
+            android:enabled="false" />
+        <Preference
+            android:key="@string/pref_key_sdk_build"
+            android:title="@string/build_title"
+            android:label="@null"
+            android:enabled="false" />
+        </PreferenceCategory>
 </PreferenceScreen>
