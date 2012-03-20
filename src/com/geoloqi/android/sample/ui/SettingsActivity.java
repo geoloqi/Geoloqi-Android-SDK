@@ -146,12 +146,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         if (key.equals(getString(R.string.pref_key_account_username))) {
             LQSession session = mService.getSession();
             if (session != null) {
+
                 if (session.isAnonymous()) {
-                    // TODO: Display log-in dialog
-                    // ...
-                } else {
-                    // TODO: Display log-out dialog
-                    // ...
+                    // Start log-in Activity
+                    startActivity(new Intent(this, AuthActivity.class));
                 }
             }
             return true;
