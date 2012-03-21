@@ -1,5 +1,8 @@
 package com.geoloqi.android.sample.ui;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -17,7 +20,7 @@ import com.geoloqi.android.sample.Constants;
 import com.geoloqi.android.sample.R;
 import com.geoloqi.android.sdk.LQException;
 import com.geoloqi.android.sdk.LQSession;
-import com.geoloqi.android.sdk.LQSession.OnUserAuthenticatedListener;
+import com.geoloqi.android.sdk.LQSession.OnRunApiRequestListener;
 import com.geoloqi.android.sdk.LQTracker;
 import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
@@ -80,9 +83,9 @@ public class AuthActivity extends Activity implements OnClickListener {
                                 Constants.LQ_SDK_SECRET, Constants.LQ_C2DM_SENDER);
                 
                 // Authenticate the session
-                session.authenticateUser(username, password, new OnUserAuthenticatedListener() {
+                session.authenticateUser(username, password, new OnRunApiRequestListener() {
                     @Override
-                    public void onComplete(LQSession session) {
+                    public void onSuccess(LQSession session, HttpResponse response) {
                         // Swap out the tracker session with our fresh one
                         LQTracker tracker = mService.getTracker();
                         if (tracker != null) {
@@ -96,6 +99,12 @@ public class AuthActivity extends Activity implements OnClickListener {
                     public void onFailure(LQSession session, LQException e) {
                         // An error occurred!
                         Toast.makeText(AuthActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                    
+                    public void onComplete(LQSession session, HttpResponse response, StatusLine status) {
+                        // The request was successful, but returned a non-200 response!
+                        Toast.makeText(AuthActivity.this, String.format("Server returned a %s response!",
+                                        status.getStatusCode()), Toast.LENGTH_LONG).show();
                     }
                 });
             }
