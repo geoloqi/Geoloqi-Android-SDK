@@ -38,7 +38,7 @@ You can launch the SDK manager by running the `android` command from your
 terminal. You can also launch the SDK manager from Eclipse (if you've installed
 the Android plugin for Eclipse).
 
-![Alt text](https://raw.github.com/geoloqi/Sample-Android-App/master/docs/images/android-sdk-manager-20.png)
+![Alt text](https://raw.github.com/geoloqi/Geoloqi-Android-SDK/master/docs/images/android-sdk-manager-20.png)
 
 Note that you may have to check the *Obsolete* checkbox to find the Android 2.0
 platform listing.
@@ -62,7 +62,7 @@ If you're using Eclipse, you'll need to also add the Geoloqi SDK library
 directory in the project root. Simply right-click the .jar and select
 *Build Path -> Add to Build Path*.
 
-![Alt text](https://raw.github.com/geoloqi/Sample-Android-App/master/docs/images/eclipse-build-path.png)
+![Alt text](https://raw.github.com/geoloqi/Geoloqi-Android-SDK/master/docs/images/eclipse-build-path.png)
 
 **Note for Eclipse users:** One common issue when importing a new Android project
 occurs when Eclipse links your project against Java 1.5 instead of Java 1.6. If this
@@ -82,7 +82,7 @@ a jar file in the `libs/` directory. To load the Javadoc into Eclipse simply:
 5. Check the *Javadoc in archive* radio button.
 6. Fill out the *Archive path* text area with the path to the geoloqi-docs.jar archive file.
 
-![Alt text](https://raw.github.com/geoloqi/Sample-Android-App/master/docs/images/eclipse-javadoc.png)
+![Alt text](https://raw.github.com/geoloqi/Geoloqi-Android-SDK/master/docs/images/eclipse-javadoc.png)
 
 Existing Projects
 =================
@@ -174,4 +174,4 @@ See LICENSE.
 [android-sdk-components]: http://developer.android.com/sdk/adding-components.html
 [android-service]: http://developer.android.com/reference/android/app/Service.html
 [stackoverflow-override]: http://stackoverflow.com/a/1678170/772122
-[eclipse-compiler-image]: https://raw.github.com/geoloqi/Sample-Android-App/master/docs/images/eclipse-compiler.png
+[eclipse-compiler-image]: https://raw.github.com/geoloqi/Geoloqi-Android-SDK/master/docs/images/eclipse-compiler.png
