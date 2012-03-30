@@ -2,6 +2,7 @@ package com.geoloqi.android.sample.receiver;
 
 import android.content.Context;
 import android.location.Location;
+import android.os.Bundle;
 
 import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
 import com.geoloqi.android.sdk.receiver.LQBroadcastReceiver;
@@ -58,6 +59,11 @@ public class SampleReceiver extends LQBroadcastReceiver {
             // that the receiver is running in a global context and
             // is not bound to any particular activity.
         }
+    }
+
+    @Override
+    public void onPushMessageReceived(Context context, Bundle data) {
+        // Pass
     }
 
     public interface OnTrackerProfileChangedListener {

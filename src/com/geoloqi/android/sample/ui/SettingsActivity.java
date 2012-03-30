@@ -14,7 +14,7 @@ import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.geoloqi.android.sample.R;
-import com.geoloqi.android.sdk.LQConstants;
+import com.geoloqi.android.sdk.LQBuild;
 import com.geoloqi.android.sdk.LQSession;
 import com.geoloqi.android.sdk.LQSharedPreferences;
 import com.geoloqi.android.sdk.LQTracker;
@@ -85,13 +85,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             // Display the SDK version
             preference = findPreference(getString(R.string.pref_key_sdk_version));
             if (preference != null) {
-                preference.setSummary(LQConstants.LQ_SDK_VERSION);
+                preference.setSummary(LQBuild.LQ_SDK_VERSION);
             }
             
             // Display the SDK build
             preference = findPreference(getString(R.string.pref_key_sdk_build));
             if (preference != null) {
-                preference.setSummary(LQConstants.LQ_SDK_BUILD);
+                preference.setSummary(LQBuild.LQ_SDK_BUILD);
             }
         }
     }
