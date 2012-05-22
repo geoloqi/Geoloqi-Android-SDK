@@ -1,0 +1,16 @@
+# Your Geoloqi client ID (required)
+client_id=my_client_id
+
+# Your Geoloqi client secret (required)
+client_secret=my_client_secret
+
+# The Google account authorized as a C2DM sender. This is required
+# for push messaging to work!
+push_account=example@gmail.com
+
+# The name of the drawable to be displayed with incoming push
+# notifications. The image must be located in one of your
+# res/drawable folders. Do not include the file extension here.
+# The SDK must be able to find a valid status bar icon or push
+# messages will fail!
+push_icon=ic_stat_notify
