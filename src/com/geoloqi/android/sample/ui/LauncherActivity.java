@@ -3,7 +3,6 @@ package com.geoloqi.android.sample.ui;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,12 +14,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.geoloqi.android.sample.Constants;
 import com.geoloqi.android.sample.R;
 import com.geoloqi.android.sample.receiver.SampleReceiver;
 import com.geoloqi.android.sdk.LQTracker;
 import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
 import com.geoloqi.android.sdk.provider.LQDatabaseHelper;
+import com.geoloqi.android.sdk.receiver.LQBroadcastReceiver;
 import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
 
@@ -47,10 +46,6 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
         
         // Start the tracking service
         Intent intent = new Intent(this, LQService.class);
-        intent.setAction(LQService.ACTION_DEFAULT);
-        intent.putExtra(LQService.EXTRA_SDK_ID, Constants.LQ_SDK_ID);
-        intent.putExtra(LQService.EXTRA_SDK_SECRET, Constants.LQ_SDK_SECRET);
-        intent.putExtra(LQService.EXTRA_C2DM_SENDER, Constants.LQ_C2DM_SENDER);
         startService(intent);
     }
 
@@ -63,11 +58,8 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
         bindService(intent, mConnection, 0);
         
         // Wire up the sample location receiver
-        final IntentFilter filter = new IntentFilter();
-        filter.addAction(SampleReceiver.ACTION_TRACKER_PROFILE_CHANGED);
-        filter.addAction(SampleReceiver.ACTION_LOCATION_CHANGED);
-        filter.addAction(SampleReceiver.ACTION_LOCATION_UPLOADED);
-        registerReceiver(mLocationReceiver, filter);
+        registerReceiver(mLocationReceiver,
+                LQBroadcastReceiver.getDefaultIntentFilter());
     }
 
     @Override

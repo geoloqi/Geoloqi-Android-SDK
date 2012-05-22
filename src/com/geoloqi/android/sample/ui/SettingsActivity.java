@@ -79,7 +79,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             // Display the account username
             preference = findPreference(getString(R.string.pref_key_account_username));
             if (preference != null) {
-                preference.setSummary(LQSharedPreferences.getAccountUsername(this));
+                preference.setSummary(LQSharedPreferences.getSessionUsername(this));
             }
             
             // Display the SDK version
@@ -146,7 +146,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         if (key.equals(getString(R.string.pref_key_account_username))) {
             LQSession session = mService.getSession();
             if (session != null) {
-
                 if (session.isAnonymous()) {
                     // Start log-in Activity
                     startActivity(new Intent(this, AuthActivity.class));

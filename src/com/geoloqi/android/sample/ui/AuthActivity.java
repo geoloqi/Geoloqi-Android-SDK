@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,11 +17,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.geoloqi.android.sample.Constants;
 import com.geoloqi.android.sample.R;
 import com.geoloqi.android.sdk.LQException;
 import com.geoloqi.android.sdk.LQSession;
 import com.geoloqi.android.sdk.LQSession.OnRunApiRequestListener;
+import com.geoloqi.android.sdk.LQSharedPreferences;
 import com.geoloqi.android.sdk.LQTracker;
 import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
@@ -78,17 +79,20 @@ public class AuthActivity extends Activity implements OnClickListener {
                 String username = ((EditText) findViewById(R.id.username)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
                 
-                // Prepare a new LQSession
-                LQSession session = new LQSession(this, Constants.LQ_SDK_ID,
-                                Constants.LQ_SDK_SECRET, Constants.LQ_C2DM_SENDER);
+                // Reset C2DM token
+                LQSharedPreferences.removePushToken(this);
                 
                 // Authenticate the session
-                session.authenticateUser(username, password, new OnRunApiRequestListener() {
+                LQSession.requestSession(username, password, new OnRunApiRequestListener() {
                     @Override
                     public void onSuccess(LQSession session, HttpResponse response) {
                         // Swap out the tracker session with our fresh one
                         LQTracker tracker = mService.getTracker();
                         if (tracker != null) {
+                            // Update the saved session
+                            mService.setSavedSession(session);
+                            
+                            // Update the tracker with the new session
                             tracker.setSession(session);
                             
                             // Finish the activity
@@ -106,7 +110,7 @@ public class AuthActivity extends Activity implements OnClickListener {
                         Toast.makeText(AuthActivity.this, String.format("Server returned a %s response!",
                                         status.getStatusCode()), Toast.LENGTH_LONG).show();
                     }
-                });
+                }, new Handler(), this);
             }
             break;
         }

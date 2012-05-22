@@ -3,6 +3,8 @@ package com.geoloqi.android.sample.receiver;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
 import com.geoloqi.android.sdk.receiver.LQBroadcastReceiver;
@@ -63,7 +65,14 @@ public class SampleReceiver extends LQBroadcastReceiver {
 
     @Override
     public void onPushMessageReceived(Context context, Bundle data) {
-        // Pass
+        Toast.makeText(context,
+                "New push message received!", Toast.LENGTH_LONG).show();
+        
+        // Dump the message payload to the console
+        Log.d(TAG, "Push message payload:");
+        for (String key : data.keySet()) {
+            Log.d(TAG, String.format("%s: %s", key, data.get(key)));
+        }
     }
 
     public interface OnTrackerProfileChangedListener {
