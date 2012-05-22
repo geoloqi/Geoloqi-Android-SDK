@@ -4,8 +4,8 @@ developing with the Geoloqi location APIs.
 
 For more information, visit: [developers.geoloqi.com][geoloqi-dev-site]
 
-Installation
-============
+## Installation
+
 This app can be compiled and run in the standard fashion using Eclipse or
 the command-line Android tools and ant. However, there are a couple of
 quick tasks to complete before running the app.
@@ -19,16 +19,27 @@ do so now! It's also a good idea to make sure you're running the latest version.
 > If you find yourself struggling with the concepts outlined below, you might
 > benefit from looking over the [Android Developer Docs][android-docs].
 
-Constants
----------
-After checking out the sample code, you'll need to create a `Constants.java`
-file that contains both your Geoloqi API Key and Secret. These are needed
-to authenticate your requests with the server. A `ConstantsTemplate.java` file
-has been provided for you in `src/com/geoloqi/android/sample/` that you
-can rename and update with your key and secret.
+### Credentials
 
-Build Target
-------------
+After checking out the sample code, you'll need to create a
+`geoloqi.properties` file that contains both your Geoloqi API id
+and secret. These are needed to authenticate your requests with the
+server. A `geoloqi.properties.sample` file has been provided for you
+in the `/assets` directory that you can copy and update with your
+id and secret.
+
+If for some reason you cannot provide a properties file, you can also
+set your client credentials manually:
+
+    LQSharedPreferences.setClientId("my_client_id");
+    LQSharedPreferences.setClientSecret("my_client_secret");
+    LQSharedPreferences.setPushAccount("example@gmail.com");
+    LQSharedPreferences.setPushIcon("ic_stat_notify");
+
+> Note: Make sure you set these values *before* starting the service!
+
+### Build Target
+
 The sample app targets Android API level 5 (Android 2.0), but you can change
 the build target to any modern version. You'll need to use the 
 [Android SDK Manager][android-sdk-components] to install the Android 2.0
@@ -43,8 +54,8 @@ the Android plugin for Eclipse).
 Note that you may have to check the *Obsolete* checkbox to find the Android 2.0
 platform listing.
 
-Building
---------
+### Building
+
 Once you've installed the platform sources you're almost ready to build the
 project. If you're using ant you can build the app immediately by executing
 the build command in the project directory.
@@ -55,8 +66,8 @@ the build command in the project directory.
     # Install to device
     $ adb install bin/GeoloqiSampleAndroidApp.apk
 
-Eclipse Build Path
-------------------
+### Eclipse Build Path
+
 If you're using Eclipse, you'll need to also add the Geoloqi SDK library
 .jar to your project's build path. The .jar is located in the `libs/`
 directory in the project root. Simply right-click the .jar and select
@@ -70,8 +81,8 @@ happens you'll see errors generated for all methods with `@Override` annotations
 You can [fix this][stackoverflow-override] by updating your [Eclipse/Project
 preferences][eclipse-compiler-image] to ensure the Java compiler level is set to 1.6.
 
-Eclipse Javadoc
----------------
+### Eclipse Javadoc
+
 The Geoloqi Android SDK Javadoc is bundled with the sample application as
 a jar file in the `libs/` directory. To load the Javadoc into Eclipse simply:
 
@@ -84,16 +95,16 @@ a jar file in the `libs/` directory. To load the Javadoc into Eclipse simply:
 
 ![Alt text](https://raw.github.com/geoloqi/Geoloqi-Android-SDK/master/docs/images/eclipse-javadoc.png)
 
-Existing Projects
-=================
+## Existing Projects
+
 If you have an existing project and would like to use the Geoloqi Android SDK
 you can simply copy the `.jar` files from the sample applications `libs/`
 directory to your project's `libs/` directory.
 
 > Note: Don't forget to add the .jar files to your project's build path!
 
-AndroidManifest.xml
--------------------
+### AndroidManifest.xml
+
 You'll need to update your project's `AndroidManifest.xml` to include certain
 permissions and enable the tracking service.
 
@@ -143,8 +154,8 @@ To enable the tracker you'll need to declare the tracking service and
     </application>
 ```
 
-Starting the Tracker
---------------------
+### Starting the Tracker
+
 The easiest way to get started is to spin up the tracking service when
 the user takes some action (such as launching your app). You can start
 the Geoloqi tracker like starting any other [Android Service][android-service].
@@ -152,17 +163,19 @@ the Geoloqi tracker like starting any other [Android Service][android-service].
 ```java
     // Start the tracking service
     Intent intent = new Intent(this, LQService.class);
-    intent.setAction(LQService.ACTION_DEFAULT);
-    intent.putExtra(LQService.EXTRA_SDK_ID, "Your Geoloqi SDK ID!");
-    intent.putExtra(LQService.EXTRA_SDK_SECRET, "Your Geoloqi SDK Secret!");
     startService(intent);
 ```
 
 This code will start the background service, create an anonymous user
 account and start requesting location updates from the system. It's that easy!
 
-License
-=======
+## Push messaging
+
+To set up your Google account as a C2DM sender, please follow the
+tutorial on the [Geoloqi developer site][push-messaging].
+
+## License
+
 Copyright 2011 by [Geoloqi.com][geoloqi-site] and contributors.
 
 See LICENSE.
@@ -175,3 +188,4 @@ See LICENSE.
 [android-service]: http://developer.android.com/reference/android/app/Service.html
 [stackoverflow-override]: http://stackoverflow.com/a/1678170/772122
 [eclipse-compiler-image]: https://raw.github.com/geoloqi/Geoloqi-Android-SDK/master/docs/images/eclipse-compiler.png
+[push-messaging]: https://developers.geoloqi.com/android/push-notifications
