@@ -106,7 +106,9 @@ directory to your project's `libs/` directory.
 ### AndroidManifest.xml
 
 You'll need to update your project's `AndroidManifest.xml` to include certain
-permissions and enable the tracking service.
+permissions and enable the tracking service. Replace any instance
+of the string `com.geoloqi.android.sample` with your package name or push
+messaging may fail to work correctly.
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
