@@ -35,6 +35,7 @@ import com.geoloqi.android.sdk.service.LQService.LQBinder;
 public class AuthActivity extends Activity implements OnClickListener {
     public static final String TAG = "AuthActivity";
     
+    private Handler mHandler = new Handler();
     private LQService mService;
     private boolean mBound;
     
@@ -110,7 +111,7 @@ public class AuthActivity extends Activity implements OnClickListener {
                         Toast.makeText(AuthActivity.this, String.format("Server returned a %s response!",
                                         status.getStatusCode()), Toast.LENGTH_LONG).show();
                     }
-                }, new Handler(), this);
+                }, mHandler, this);
             }
             break;
         }
