@@ -1,0 +1,168 @@
+#!/usr/bin/python
+"""
+This script will generate a new AndroidManifest.xml file with
+all the required blocks for integrating with the Geoloqi Android SDK.
+
+:author: Tristan Waddington <tristan@geoloqi.com>
+"""
+import os
+import sys
+
+from optparse import OptionParser
+
+MANIFEST = """\
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="{package}"
+    android:versionCode="1"
+    android:versionName="1.0">
+    
+    <uses-sdk android:minSdkVersion="5" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+{extra_permissions}
+    <application
+        android:label="@string/app_name">
+        <activity
+            android:name=".{activity}"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <service
+            android:name="com.geoloqi.android.sdk.service.LQService"
+            android:exported="false" />{extra_receivers}
+    </application>
+</manifest>"""
+
+PUSH_PERMISSIONS = """\
+
+    <permission
+        android:name="{package}.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="{package}.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />\n"""
+
+PUSH_RECEIVER = """\
+
+
+        <receiver
+            android:name="com.geoloqi.android.sdk.receiver.LQDeviceMessagingReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="{package}" />
+            </intent-filter>
+        </receiver>"""
+
+def main():
+    usage = """\
+%prog [options]
+  Generate a new AndroidManifest.xml file in the current working
+  directory with all the blocks required by the Geoloqi Android SDK."""
+
+    # Init options parser
+    parser = OptionParser(usage=usage, version="%prog 1.0.0")
+
+    # Add options
+    parser.add_option('--package', dest='package_name',
+            help='The package name for your application (e.g. com.geoloqi.demo).')
+    parser.add_option('--activity-name', dest='activity_name',
+            help='The class name of your main Activity.')
+    parser.add_option('--push-enabled', dest='push_enabled', action='store_true',
+            help='Enable push messaging.')
+    parser.add_option('--no-input', dest='no_input', action='store_true',
+            help='If set, all input will be expected as command-line options.')
+    parser.add_option('--dest', dest='output_dir',
+            help='The output directory (defaults to the current working directory).')
+
+    # Set defaults
+    parser.set_defaults(push_enabled=False, no_input=False,
+            output_dir=os.getcwdu(),)
+
+    # Get args
+    (options, args) = parser.parse_args()
+
+    package_name = options.package_name
+    activity_name = options.activity_name
+    push_enabled = options.push_enabled
+    output_dir = options.output_dir
+
+    # Ensure the output directory exists
+    if not os.path.isdir(output_dir):
+        parser.error('The output directory "%s" does not exist!' % output_dir)
+
+    # Generate our manifest path
+    manifest_path = '%s/AndroidManifest.xml' % output_dir
+
+    # Acceptable boolean values
+    valid_yes = ('y', 'yes')
+    valid_no = ('n', 'no')
+
+    if not options.no_input:
+        if not package_name:
+            package_name = raw_input(\
+                    'Enter your package name (e.g. com.geoloqi.demo): ')
+            package_name = package_name.strip()
+
+        if not activity_name:
+            activity_name = raw_input(\
+                    'Enter your desired activity name [LauncherActivity]: ')
+            activity_name = activity_name.strip()
+
+        # Get push preference
+        yesno = raw_input('Enable push messaging? [Y/n]: ')
+        yesno = yesno.strip().lower()
+
+        if yesno in valid_no:
+            push_enabled = False
+        else:
+            push_enabled = True
+
+    if not activity_name:
+        activity_name = 'LauncherActivity'
+
+    if not package_name:
+        parser.error('You must enter a valid package name!')
+    else:
+        # Verify AndroidManifest.xml does not already exist
+        if os.path.exists(manifest_path):
+            # Rename existing manifest
+            os.rename(manifest_path, '%s.old' % manifest_path)
+
+        with open(manifest_path, 'w') as f:
+            out = MANIFEST
+
+            # Prepare our variables
+            data = {
+                'package': package_name,
+                'activity': activity_name,
+                'extra_permissions': '',
+                'extra_receivers': '',
+            }
+
+            if push_enabled:
+                data['extra_permissions'] = PUSH_PERMISSIONS.format(package=package_name)
+                data['extra_receivers'] = PUSH_RECEIVER.format(package=package_name)
+
+            # Format the manifest
+            out = out.format(**data)
+
+            # Write the new manifest
+            f.write(out)
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        print "\n"
+        pass
