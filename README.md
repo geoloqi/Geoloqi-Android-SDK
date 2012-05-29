@@ -98,7 +98,7 @@ a jar file in the `libs/` directory. To load the Javadoc into Eclipse simply:
 ## Existing Projects
 
 If you have an existing project and would like to use the Geoloqi Android SDK
-you can simply copy the `.jar` files from the sample applications `libs/`
+you can simply copy the `.jar` files from the sample application's `libs/`
 directory to your project's `libs/` directory.
 
 > Note: Don't forget to add the .jar files to your project's build path!
@@ -107,17 +107,17 @@ directory to your project's `libs/` directory.
 
 You'll need to make sure your project's `AndroidManifest.xml` declares
 certain permissions and services, otherwise the Geoloqi SDK may
-fail to function correctly.
+not function as expected.
 
-> Note: You can now run the included script `generate-manifest` from a
+> Note: You can run the included script `generate-manifest` from a
 > terminal to generate a new barebone AndroidManifest.xml.
 
-The best way to get started is simply copy the `AndroidManifest.xml` from
+The best way to get started is to copy the `AndroidManifest.xml` from
 the sample project and replace any instance of the package name
-`com.geoloqi.android.sample` with your package name.
+`com.geoloqi.android.sample` with your own package name.
 
-Push messaging will fail to work  properly if you do not update the
-manifest with the correct package name.
+> Note: Push messaging will not work if you do not update the manifest
+> with the correct package name!
 
 ### Starting the Tracker
 
