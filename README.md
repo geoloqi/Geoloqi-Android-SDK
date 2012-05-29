@@ -105,56 +105,19 @@ directory to your project's `libs/` directory.
 
 ### AndroidManifest.xml
 
-You'll need to update your project's `AndroidManifest.xml` to include certain
-permissions and enable the tracking service. Replace any instance
-of the string `com.geoloqi.android.sample` with your package name or push
-messaging may fail to work correctly.
+You'll need to make sure your project's `AndroidManifest.xml` declares
+certain permissions and services, otherwise the Geoloqi SDK may
+fail to function correctly.
 
-```xml
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+> Note: You can now run the included script `generate-manifest` from a
+> terminal to generate a new barebone AndroidManifest.xml.
 
-    <!-- Note: This custom permission name should begin with your application's package name! -->
-    <permission
-        android:name="com.geoloqi.android.sample.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
+The best way to get started is simply copy the `AndroidManifest.xml` from
+the sample project and replace any instance of the package name
+`com.geoloqi.android.sample` with your package name.
 
-    <!-- These permissions are required to enable the C2DM features of the SDK. -->
-    <uses-permission android:name="com.geoloqi.android.sample.permission.C2D_MESSAGE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-```
-
-Optionally, you may also want to include the `ACCESS_MOCK_LOCATION` permission if you plan on doing any testing.
-
-```xml
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-```
-
-To enable the tracker you'll need to declare the tracking service and 
-(optionally) the C2DM receiver.
-
-```xml
-    <application>
-        <service
-            android:name="com.geoloqi.android.sdk.service.LQService"
-            android:exported="false" />
-        <receiver
-            android:name="com.geoloqi.android.sdk.receiver.LQDeviceMessagingReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <!-- This should equal your application's package name! -->
-                <category android:name="com.geoloqi.android.sample" />
-            </intent-filter>
-        </receiver>
-    </application>
-```
+Push messaging will fail to work  properly if you do not update the
+manifest with the correct package name.
 
 ### Starting the Tracker
 
