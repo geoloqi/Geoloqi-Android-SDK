@@ -165,4 +165,3 @@ if __name__ == "__main__":
         sys.exit(main())
     except KeyboardInterrupt:
         print "\n"
-        pass
