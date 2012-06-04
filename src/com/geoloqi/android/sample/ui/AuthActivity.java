@@ -1,7 +1,8 @@
 package com.geoloqi.android.sample.ui;
 
-import org.apache.http.HttpResponse;
+import org.apache.http.Header;
 import org.apache.http.StatusLine;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -86,7 +87,8 @@ public class AuthActivity extends Activity implements OnClickListener {
                 // Authenticate the session
                 LQSession.requestSession(username, password, new OnRunApiRequestListener() {
                     @Override
-                    public void onSuccess(LQSession session, HttpResponse response) {
+                    public void onSuccess(LQSession session, JSONObject json,
+                            Header[] headers) {
                         // Swap out the tracker session with our fresh one
                         LQTracker tracker = mService.getTracker();
                         if (tracker != null) {
@@ -105,8 +107,9 @@ public class AuthActivity extends Activity implements OnClickListener {
                         // An error occurred!
                         Toast.makeText(AuthActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-                    
-                    public void onComplete(LQSession session, HttpResponse response, StatusLine status) {
+                    @Override
+                    public void onComplete(LQSession session, JSONObject json,
+                            Header[] headers, StatusLine status) {
                         // The request was successful, but returned a non-200 response!
                         Toast.makeText(AuthActivity.this, String.format("Server returned a %s response!",
                                         status.getStatusCode()), Toast.LENGTH_LONG).show();
