@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geoloqi.android.sample.R;
@@ -129,12 +128,6 @@ public class AuthActivity extends Activity implements OnClickListener {
                 LQBinder binder = (LQBinder) service;
                 mService = binder.getService();
                 mBound = true;
-                
-                // Display the current tracker profile
-                TextView profileView = (TextView) findViewById(R.id.tracker_profile);
-                if (profileView != null) {
-                    profileView.setText(mService.getTracker().getProfile().toString());
-                }
             } catch (ClassCastException e) {
                 // Pass
             }
