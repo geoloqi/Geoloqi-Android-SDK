@@ -10,7 +10,8 @@
             android:enabled="true"
             android:entries="@array/tracker_profile_entries"
             android:entryValues="@array/tracker_profile_values"
-            android:defaultValue="0" />
+            android:persistent="false"
+            android:defaultValue="2" />
     </PreferenceCategory>
     
     <!-- Account preferences -->

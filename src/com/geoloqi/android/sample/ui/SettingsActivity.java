@@ -49,6 +49,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
         Preference preference = findPreference(getString(R.string.pref_key_tracker_profile));
         if (preference != null) {
             preference.setOnPreferenceChangeListener(this);
+            preference.setDefaultValue(
+                    LQSharedPreferences.getTrackerProfile(this).ordinal());
         }
         
         preference = findPreference(getString(R.string.pref_key_account_username));

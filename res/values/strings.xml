@@ -31,6 +31,7 @@
     <!-- Preference values -->
     <string-array name="tracker_profile_entries">
         <item>OFF</item>
+        <item>Rough</item>
         <item>Passive</item>
         <item>Logging</item>
         <item>Real-time</item>
@@ -40,5 +41,6 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
 </resources>
