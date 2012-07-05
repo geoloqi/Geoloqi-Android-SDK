@@ -66,15 +66,6 @@ the build command in the project directory.
     # Install to device
     $ adb install bin/GeoloqiSampleAndroidApp.apk
 
-### Eclipse Build Path
-
-If you're using Eclipse, you'll need to also add the Geoloqi SDK library
-.jar to your project's build path. The .jar is located in the `libs/`
-directory in the project root. Simply right-click the .jar and select
-*Build Path -> Add to Build Path*.
-
-![Alt text](https://raw.github.com/geoloqi/Geoloqi-Android-SDK/master/docs/images/eclipse-build-path.png)
-
 **Note for Eclipse users:** One common issue when importing a new Android project
 occurs when Eclipse links your project against Java 1.5 instead of Java 1.6. If this
 happens you'll see errors generated for all methods with `@Override` annotations.
@@ -84,24 +75,14 @@ preferences][eclipse-compiler-image] to ensure the Java compiler level is set to
 ### Eclipse Javadoc
 
 The Geoloqi Android SDK Javadoc is bundled with the sample application as
-a jar file in the `libs/` directory. To load the Javadoc into Eclipse simply:
-
-1. Expand the *Referenced Libraries* section of the project in the Eclipse *Package Explorer*.
-2. Right-click on the Geoloqi SDK library (if it isn't listed, check that you've added it to your *Build Path*).
-3. Select *Properties*.
-4. Select *Javadoc Location*.
-5. Check the *Javadoc in archive* radio button.
-6. Fill out the *Archive path* text area with the path to the geoloqi-docs.jar archive file.
-
-![Alt text](https://raw.github.com/geoloqi/Geoloqi-Android-SDK/master/docs/images/eclipse-javadoc.png)
+a jar file in the `libs/` directory. If you're using the latest version of
+the Android Developer Tools plugin the docs should be loaded automatically.
 
 ## Existing Projects
 
 If you have an existing project and would like to use the Geoloqi Android SDK
 you can simply copy the `.jar` files from the sample application's `libs/`
 directory to your project's `libs/` directory.
-
-> Note: Don't forget to add the .jar files to your project's build path!
 
 ### AndroidManifest.xml
 
