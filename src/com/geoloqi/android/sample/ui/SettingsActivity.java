@@ -6,6 +6,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -167,6 +168,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
                 LQBinder binder = (LQBinder) service;
                 mService = binder.getService();
                 mBound = true;
+                
+                ListPreference preference = (ListPreference) findPreference(
+                        getString(R.string.pref_key_tracker_profile));
+                if (preference != null) {
+                    LQTracker tracker = mService.getTracker();
+                    if (tracker != null) {
+                        int profile = tracker.getProfile().ordinal();
+                        preference.setDefaultValue(profile);
+                        preference.setValueIndex(profile);
+                    }
+                }
             } catch (ClassCastException e) {
                 // Pass
             }
