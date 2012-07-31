@@ -33,7 +33,7 @@ set your client credentials manually:
 
     LQSharedPreferences.setClientId("my_client_id");
     LQSharedPreferences.setClientSecret("my_client_secret");
-    LQSharedPreferences.setPushAccount("example@gmail.com");
+    LQSharedPreferences.setGcmPushAccount("4815162342");
     LQSharedPreferences.setPushIcon("ic_stat_notify");
 
 > Note: Make sure you set these values *before* starting the service!
@@ -117,7 +117,7 @@ account and start requesting location updates from the system. It's that easy!
 
 ## Push messaging
 
-To set up your Google account as a C2DM sender, please follow the
+To set up your Google account as a GCM sender, please follow the
 tutorial on the [Geoloqi developer site][push-messaging].
 
 ## License

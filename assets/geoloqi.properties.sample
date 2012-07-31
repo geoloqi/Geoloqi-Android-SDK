@@ -4,9 +4,9 @@ client_id=my_client_id
 # Your Geoloqi client secret (required)
 client_secret=my_client_secret
 
-# The Google account authorized as a C2DM sender. This is required
-# for push messaging to work!
-push_account=example@gmail.com
+# Your GCM sender ID. This is required for push
+# messaging to work!
+gcm_sender_id=0000000001
 
 # The name of the drawable to be displayed with incoming push
 # notifications. The image must be located in one of your

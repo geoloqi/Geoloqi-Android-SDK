@@ -80,7 +80,7 @@ public class AuthActivity extends Activity implements OnClickListener {
                 String username = ((EditText) findViewById(R.id.username)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
                 
-                // Reset C2DM token
+                // Reset push token
                 LQSharedPreferences.removePushToken(this);
                 
                 // Authenticate the session
