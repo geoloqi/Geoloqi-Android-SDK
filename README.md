@@ -90,7 +90,7 @@ You'll need to make sure your project's `AndroidManifest.xml` declares
 certain permissions and services, otherwise the Geoloqi SDK may
 not function as expected.
 
-> Note: You can run the included script `generate-manifest` from a
+> Note: You can run the included script `tools/generate-manifest` from a
 > terminal to generate a new barebone AndroidManifest.xml.
 
 The best way to get started is to copy the `AndroidManifest.xml` from
