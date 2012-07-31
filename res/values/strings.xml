@@ -32,7 +32,7 @@
     <string-array name="tracker_profile_entries">
         <item>OFF</item>
         <item>Rough</item>
-        <item>Passive</item>
+        <item>Adaptive</item>
         <item>Logging</item>
         <item>Real-time</item>
     </string-array>
