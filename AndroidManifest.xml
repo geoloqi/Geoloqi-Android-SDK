@@ -19,7 +19,7 @@
     <!-- NOTE: This permission should not be included for most production applications. -->
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     
-    <!-- NOTE: These permissions are required if you wish to enable C2DM support in the Geoloqi SDK. -->
+    <!-- NOTE: These permissions are required if you wish to enable GCM support in the Geoloqi SDK. -->
     <permission
         android:name="com.geoloqi.android.sample.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -63,7 +63,7 @@
         <service
             android:name="com.geoloqi.android.sdk.service.LQService"
             android:exported="false" />
-        <!-- NOTE: This receiver is required if you wish to enable C2DM support in the Geoloqi SDK. -->
+        <!-- NOTE: This receiver is required if you wish to enable GCM support in the Geoloqi SDK. -->
         <receiver
             android:name="com.geoloqi.android.sdk.receiver.LQDeviceMessagingReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
