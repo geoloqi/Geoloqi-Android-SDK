@@ -1,8 +1,8 @@
 # Your Geoloqi client ID (required)
 client_id=my_client_id
 
-# Your Geoloqi client secret (required)
-client_secret=my_client_secret
+# Your Geoloqi client secret (no longer used, leave blank)
+client_secret=
 
 # Your GCM sender ID. This is required for push
 # messaging to work!
