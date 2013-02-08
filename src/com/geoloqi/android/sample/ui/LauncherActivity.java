@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -13,12 +11,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import com.geoloqi.android.sample.R;
 import com.geoloqi.android.sample.receiver.SampleReceiver;
-import com.geoloqi.android.sdk.LQTracker;
 import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
-import com.geoloqi.android.sdk.provider.LQDatabaseHelper;
 import com.geoloqi.android.sdk.receiver.LQBroadcastReceiver;
 import com.geoloqi.android.sdk.service.LQService;
 import com.geoloqi.android.sdk.service.LQService.LQBinder;
@@ -95,23 +90,6 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
     }
 
     /**
-     * Display the number of batched location fixes waiting to be sent.
-     */
-    private void showBatchedLocationCount() {
-        TextView updates = (TextView) findViewById(R.id.batched_updates);
-        if (updates != null) {
-            final LQTracker tracker = mService.getTracker();
-            final LQDatabaseHelper helper = new LQDatabaseHelper(this);
-            final SQLiteDatabase db = helper.getWritableDatabase();
-            final Cursor c = tracker.getBatchedLocationFixes(db);
-            updates.setText(String.format("%d batched updates",
-                            c.getCount()));
-            c.close();
-            db.close();
-        }
-    }
-
-    /**
      * Display the values from the last recorded location fix.
      * @param location
      */
@@ -179,12 +157,10 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
 
     @Override
     public void onLocationChanged(Location location) {
-        showBatchedLocationCount();
         showCurrentLocation(location);
     }
 
     @Override
     public void onLocationUploaded(int count) {
-        showBatchedLocationCount();
     }
 }
