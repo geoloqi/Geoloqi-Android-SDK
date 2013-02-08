@@ -18,7 +18,7 @@
     <PreferenceCategory
         android:title="@string/account_category_title">
         <Preference
-            android:key="@string/pref_key_account_username"
+            android:key="@string/pref_key_device_secret"
             android:title="@string/username_title"
             android:label="@null" />
     </PreferenceCategory>

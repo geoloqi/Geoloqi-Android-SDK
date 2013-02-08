@@ -14,8 +14,8 @@
     
     <!-- Preference keys -->
     <string name="pref_key_tracker_profile">tracker_profile</string>
-    <string name="pref_key_account_username">account_username</string>
     <string name="pref_key_device_id">device_id</string>
+    <string name="pref_key_device_secret">device_secret</string>
     <string name="pref_key_device_mac">device_mac</string>
     <string name="pref_key_sdk_version">sdk_version</string>
     <string name="pref_key_sdk_build">sdk_build</string>

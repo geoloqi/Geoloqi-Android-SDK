@@ -13,10 +13,8 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
-
 import com.geoloqi.android.sample.R;
 import com.geoloqi.android.sdk.LQBuild;
-import com.geoloqi.android.sdk.LQSession;
 import com.geoloqi.android.sdk.LQSharedPreferences;
 import com.geoloqi.android.sdk.LQTracker;
 import com.geoloqi.android.sdk.LQTracker.LQTrackerProfile;
@@ -54,7 +52,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
                     LQSharedPreferences.getTrackerProfile(this).ordinal());
         }
         
-        preference = findPreference(getString(R.string.pref_key_account_username));
+        preference = findPreference(getString(R.string.pref_key_device_secret));
         if (preference != null) {
             preference.setOnPreferenceClickListener(this);
         }
@@ -70,7 +68,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             // Display the device ID
             preference = findPreference(getString(R.string.pref_key_device_id));
             if (preference != null) {
-                preference.setSummary(LQSharedPreferences.getDeviceUuid(this));
+                preference.setSummary(LQSharedPreferences.getDeviceId(this));
             }
             
             // Display the WiFi MAC address
@@ -80,9 +78,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
             }
             
             // Display the account username
-            preference = findPreference(getString(R.string.pref_key_account_username));
+            preference = findPreference(getString(R.string.pref_key_device_secret));
             if (preference != null) {
-                preference.setSummary(LQSharedPreferences.getSessionUsername(this));
+                preference.setSummary(LQSharedPreferences.getDeviceSecret(this));
             }
             
             // Display the SDK version
@@ -146,16 +144,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     @Override
     public boolean onPreferenceClick(Preference preference) {
         final String key = preference.getKey();
-        if (key.equals(getString(R.string.pref_key_account_username))) {
-            LQSession session = mService.getSession();
-            if (session != null) {
-                if (session.isAnonymous()) {
-                    // Start log-in Activity
-                    startActivity(new Intent(this, AuthActivity.class));
-                }
-            }
-            return true;
-        }
         return false;
     }
 
