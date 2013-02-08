@@ -7,8 +7,10 @@ gen/
 lint.xml
 
 # Ignore editor files
+*.iml
 *.old
 *.swp
+.idea/
 .settings
 .classpath
 local.properties
