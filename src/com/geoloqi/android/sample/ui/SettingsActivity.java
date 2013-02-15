@@ -77,12 +77,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
                 preference.setSummary(LQSharedPreferences.getMacAddress(this));
             }
             
-            // Display the account username
-            preference = findPreference(getString(R.string.pref_key_device_secret));
-            if (preference != null) {
-                preference.setSummary(LQSharedPreferences.getDeviceSecret(this));
-            }
-            
             // Display the SDK version
             preference = findPreference(getString(R.string.pref_key_sdk_version));
             if (preference != null) {
