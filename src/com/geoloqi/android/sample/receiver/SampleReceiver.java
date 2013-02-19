@@ -80,7 +80,7 @@ public class SampleReceiver extends LQBroadcastReceiver {
     @Override
     public void onPushTokenRegistered(Context context) {
         try {
-            OnPushTokenRegistered listener = (OnPushTokenRegistered) context;
+            OnPushTokenRegisteredListener listener = (OnPushTokenRegisteredListener) context;
             listener.onPushTokenRegistered();
         } catch (ClassCastException e) {
             // The broadcast receiver is running with a Context that
@@ -120,7 +120,7 @@ public class SampleReceiver extends LQBroadcastReceiver {
         public void onDeviceRegistered();
     }
 
-    public interface OnPushTokenRegistered {
+    public interface OnPushTokenRegisteredListener {
         public void onPushTokenRegistered();
     }
 }
