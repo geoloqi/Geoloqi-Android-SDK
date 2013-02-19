@@ -52,6 +52,8 @@
                 <action android:name="com.geoloqi.android.sdk.action.LOCATION_CHANGED" />
                 <action android:name="com.geoloqi.android.sdk.action.LOCATION_UPLOADED" />
                 <action android:name="com.geoloqi.android.sdk.action.PUSH_MESSAGE_RECEIVED" />
+                <action android:name="com.geoloqi.sdk.action.PUSH_TOKEN_REGISTERED" />
+                <action android:name="com.geoloqi.sdk.action.DEVICE_REGISTERED" />
             </intent-filter>
         </receiver>
         

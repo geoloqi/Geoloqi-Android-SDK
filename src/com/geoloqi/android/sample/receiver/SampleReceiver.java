@@ -63,7 +63,6 @@ public class SampleReceiver extends LQBroadcastReceiver {
         }
     }
 
-
     @Override
     public void onDeviceRegistered(Context context) {
         try {
