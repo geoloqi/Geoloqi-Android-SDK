@@ -63,6 +63,35 @@ public class SampleReceiver extends LQBroadcastReceiver {
         }
     }
 
+
+    @Override
+    public void onDeviceRegistered(Context context) {
+        try {
+            OnDeviceRegisteredListener listener = (OnDeviceRegisteredListener) context;
+            listener.onDeviceRegistered();
+        } catch (ClassCastException e) {
+            // The broadcast receiver is running with a Context that
+            // does not implement OnLocationUploadedListener. If your activity
+            // has implemented the interface, then this generally means
+            // that the receiver is running in a global context and
+            // is not bound to any particular activity.
+        }
+    }
+
+    @Override
+    public void onPushTokenRegistered(Context context) {
+        try {
+            OnPushTokenRegistered listener = (OnPushTokenRegistered) context;
+            listener.onPushTokenRegistered();
+        } catch (ClassCastException e) {
+            // The broadcast receiver is running with a Context that
+            // does not implement OnLocationUploadedListener. If your activity
+            // has implemented the interface, then this generally means
+            // that the receiver is running in a global context and
+            // is not bound to any particular activity.
+        }
+    }
+
     @Override
     public void onPushMessageReceived(Context context, Bundle data) {
         Toast.makeText(context,
@@ -86,5 +115,13 @@ public class SampleReceiver extends LQBroadcastReceiver {
 
     public interface OnLocationUploadedListener {
         public void onLocationUploaded(int count);
+    }
+
+    public interface OnDeviceRegisteredListener {
+        public void onDeviceRegistered();
+    }
+
+    public interface OnPushTokenRegistered {
+        public void onPushTokenRegistered();
     }
 }
