@@ -32,7 +32,7 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
 
     private LQService mService;
     private boolean mBound;
-    private SampleReceiver mLocationReceiver = new SampleReceiver();
+    private SampleReceiver mSampleReceiver = new SampleReceiver();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
         bindService(intent, mConnection, 0);
         
         // Wire up the sample receiver
-        registerReceiver(mLocationReceiver, LQBroadcastReceiver.getDefaultIntentFilter());
+        registerReceiver(mSampleReceiver, LQBroadcastReceiver.getDefaultIntentFilter());
     }
 
     @Override
@@ -66,8 +66,8 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
             mBound = false;
         }
         
-        // Unregister our location receiver
-        unregisterReceiver(mLocationReceiver);
+        // Unregister our sample receiver
+        unregisterReceiver(mSampleReceiver);
     }
 
     @Override
