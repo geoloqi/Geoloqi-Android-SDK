@@ -21,8 +21,7 @@ public class SampleReceiver extends LQBroadcastReceiver {
     public static final String TAG = "SampleReceiver";
 
     @Override
-    public void onTrackerProfileChanged(Context context,
-                    LQTrackerProfile oldProfile, LQTrackerProfile newProfile) {
+    public void onTrackerProfileChanged(Context context, LQTrackerProfile oldProfile, LQTrackerProfile newProfile) {
         try {
             OnTrackerProfileChangedListener listener = (OnTrackerProfileChangedListener) context;
             listener.onTrackerProfileChanged(oldProfile, newProfile);
@@ -104,23 +103,22 @@ public class SampleReceiver extends LQBroadcastReceiver {
     }
 
     public interface OnTrackerProfileChangedListener {
-        public void onTrackerProfileChanged(LQTrackerProfile oldProfile,
-                        LQTrackerProfile newProfile);
+        void onTrackerProfileChanged(LQTrackerProfile oldProfile, LQTrackerProfile newProfile);
     }
 
     public interface OnLocationChangedListener {
-        public void onLocationChanged(Location location);
+        void onLocationChanged(Location location);
     }
 
     public interface OnLocationUploadedListener {
-        public void onLocationUploaded(int count);
+        void onLocationUploaded(int count);
     }
 
     public interface OnDeviceRegisteredListener {
-        public void onDeviceRegistered();
+        void onDeviceRegistered();
     }
 
     public interface OnPushTokenRegisteredListener {
-        public void onPushTokenRegistered();
+        void onPushTokenRegistered();
     }
 }

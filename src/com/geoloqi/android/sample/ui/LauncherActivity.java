@@ -52,9 +52,8 @@ public class LauncherActivity extends Activity implements SampleReceiver.OnLocat
         Intent intent = new Intent(this, LQService.class);
         bindService(intent, mConnection, 0);
         
-        // Wire up the sample location receiver
-        registerReceiver(mLocationReceiver,
-                LQBroadcastReceiver.getDefaultIntentFilter());
+        // Wire up the sample receiver
+        registerReceiver(mLocationReceiver, LQBroadcastReceiver.getDefaultIntentFilter());
     }
 
     @Override
